@@ -1,9 +1,7 @@
-version: "3.9"
-
 services:
-  neo4j:
+  engknowledgegraph-neo4j:
     image: neo4j:5
-    container_name: infragraph-neo4j
+    container_name: engknowledgegraph-neo4j
     ports:
       - "7474:7474"
       - "7687:7687"
@@ -12,6 +10,19 @@ services:
     volumes:
       - neo4j_data:/data
       - neo4j_logs:/logs
+    restart: unless-stopped
+
+  engknowledgegraph-watcher:
+    build: .
+    container_name: engknowledgegraph-watcher
+    depends_on:
+      - engknowledgegraph-neo4j
+    volumes:
+      - ./data:/app/data
+    environment:
+      NEO4J_URI: bolt://engknowledgegraph-neo4j:7687
+      NEO4J_USER: neo4j
+      NEO4J_PASSWORD: password
     restart: unless-stopped
 
 volumes:
