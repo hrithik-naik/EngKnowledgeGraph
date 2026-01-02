@@ -6,6 +6,7 @@ from pathlib import Path
 from connectors.teams import TeamsConnector
 from connectors.docker_compose import DockerComposeConnector
 from connectors.kubernetes import KubernetesConnector
+from graph.neo4j_storage import Neo4jStorage
 
 
 def load_yaml_documents(path):
@@ -49,13 +50,15 @@ def main():
 
     nodes, edges = run_ingestion(Path("data"), connectors)
 
-    print("\n=== NODES ===")
-    for node in nodes:
-        print(node)
+    storage = Neo4jStorage(
+        uri="bolt://localhost:7687",
+        user="neo4j",
+        password="password",
+    )
 
-    print("\n=== EDGES ===")
-    for edge in edges:
-        print(edge)
+    storage.write_nodes(nodes)
+    storage.write_edges(edges)
+    storage.close()
 
 
 if __name__ == "__main__":
