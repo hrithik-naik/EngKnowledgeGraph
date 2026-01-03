@@ -360,17 +360,4 @@ Neo4j was chosen for this implementation because:
 
 ---
 
-## License
 
-MIT
-
----
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Add your connector or feature
-4. Submit a pull request
-
-For new connectors, follow the pattern in `connectors/docker_compose.py`.
