@@ -65,7 +65,7 @@ def run_ingestion(data_dir, connectors):
 
 import time
 
-def write_with_retry(storage, nodes, edges, retries=10, delay=2):
+def write_with_retry(storage, nodes, edges, retries=20, delay=2):
     for attempt in range(1, retries + 1):
         try:
             time.sleep(1)
