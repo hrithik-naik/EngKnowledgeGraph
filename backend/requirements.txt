@@ -2,3 +2,9 @@ fastapi
 uvicorn[standard]
 neo4j
 pydantic
+langchain
+langchain-core
+
+
+
+langchain-groq
