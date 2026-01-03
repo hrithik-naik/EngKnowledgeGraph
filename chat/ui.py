@@ -16,7 +16,7 @@ def call_backend(query: str) -> str:
         response = requests.post(
             API_URL,
             json={"query": query},
-            timeout=5,
+            timeout=25,
         )
 
         if response.status_code != 200:
